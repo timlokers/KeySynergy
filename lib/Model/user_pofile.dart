@@ -1,9 +1,9 @@
 class UserProfile {
-  int id;
-  String name;
-  String lastname;
-  String email;
-  String phoneId;
+  final int id;
+  final String name;
+  final String lastname;
+  final String email;
+  final String phoneId;
 
   UserProfile(
       {required this.id,
