@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:key_synergy/API/key_api.dart';
+import 'package:key_synergy/API/key_synergy_api.dart';
+import 'package:key_synergy/Model/user_pofile.dart';
 
 class KeyListContainer extends StatelessWidget {
+  final KeySynergyAPI _KeySynergyAPI = KeySynergyAPI();
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder(
-        future: ,
-      ),
-    )
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Text,
-        )
-      },
-    );
+    return FutureBuilder<List<UserProfile>>(
+        future: _KeySynergyAPI.getUserProfiles(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<UserProfile>? data = snapshot.data;
+            return ListView.builder(
+                itemCount: data!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 75,
+                    color: Colors.white,
+                    child: Center(
+                      child:
+                          Text(data[index].name + ' ' + data[index].lastname),
+                    ),
+                  );
+                });
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          else{
+           return const Text('');
+          }
+        });
   }
 }

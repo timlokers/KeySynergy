@@ -3,22 +3,18 @@ class UserProfile {
   final String name;
   final String lastname;
   final String email;
-  final String phoneId;
+  final String? phoneId;
 
-  UserProfile(
-      {required this.id,
-      required this.name,
-      required this.lastname,
-      required this.email,
-      required this.phoneId});
+  UserProfile({required this.id, required this.name, required this.lastname, required this.email, this.phoneId});
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(
-      id: json['id'],
-      name: json['name'],
-      lastname: json['lastname'],
-      email: json['email'],
-      phoneId: json['phoneId'],
+      id: json['Id'],
+      name: json['Name'],
+      lastname: json['Lastname'],
+      email: json['Email'],
+      phoneId: json['PhoneId'],
     );
   }
 }
+
