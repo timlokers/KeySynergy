@@ -16,12 +16,10 @@ class KeyListContainer extends StatelessWidget {
             return ListView.builder(
                 itemCount: data!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 75,
+                  return Card(
                     color: Colors.white,
-                    child: Center(
-                      child:
-                          Text(data[index].name + ' ' + data[index].lastname),
+                    child: ListTile(
+                          title: Text(data[index].name + ' ' + data[index].lastname),
                     ),
                   );
                 });
