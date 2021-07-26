@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 /* API import */
 import 'package:key_synergy/API/key_synergy_api.dart';
+import 'package:key_synergy/Logic/device_identifier.dart';
 
 /* Model import */
 import 'package:key_synergy/Model/user_pofile.dart';
-
 
 class KeyListContainer extends StatelessWidget {
   final KeySynergyAPI _KeySynergyAPI = KeySynergyAPI();
@@ -43,6 +43,7 @@ class KeyListContainer extends StatelessWidget {
                             color: Color.fromARGB(255, 249, 165, 27),
                           ),
                         ),
+                        trailing: Text(DeviceIdentifier().getDeviceInfo().then((value) => print(value))),
                       ),
                       decoration: const BoxDecoration(
                           border: Border(bottom: BorderSide())));
