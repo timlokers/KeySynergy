@@ -2,28 +2,22 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:device_info/device_info.dart';
 
-class DeviceIdentifier {
-  DeviceInfoPlugin deviceId = DeviceInfoPlugin();
+class DeviceInfo {
 
-  Future<String> getDeviceId() async{
-
-    String deviceInfo = '';
+  Future<String?> getDeviceId() async {
+    DeviceInfoPlugin deviceId = DeviceInfoPlugin();
 
     try {
       if (Platform.isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceId.androidInfo;
-        deviceInfo = androidInfo.id;
-        log(deviceInfo);
+        return androidInfo.id;
       } else if (Platform.isIOS) {
         IosDeviceInfo iosInfo = await deviceId.iosInfo;
-        deviceInfo = iosInfo.identifierForVendor;
-        log(deviceInfo);
+        return iosInfo.identifierForVendor;
       }
     }
-    catch (e){
+    catch (e) {
       throw Exception(e);
     }
-    return deviceInfo;
-    }
   }
-
+}

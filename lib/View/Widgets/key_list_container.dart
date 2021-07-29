@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 /* API import */
 import 'package:key_synergy/API/key_synergy_api.dart';
-import 'package:key_synergy/Logic/device_identifier.dart';
+import 'package:key_synergy/Logic/device_info.dart';
 
 
 /* Model import */
@@ -12,7 +12,6 @@ import 'package:key_synergy/Model/user_pofile.dart';
 
 class KeyListContainer extends StatelessWidget {
   final KeySynergyAPI _KeySynergyAPI = KeySynergyAPI();
-  final DeviceIdentifier _deviceIdentifier = DeviceIdentifier();
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +46,7 @@ class KeyListContainer extends StatelessWidget {
                         ),
                         trailing: TextButton(
                           child: Text('Bite me'),
-                          onPressed: () async{
-                            _deviceIdentifier.deviceId;
+                          onPressed: () {
                           },
                         ),
                       ),
