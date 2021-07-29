@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 /* API import */
 import 'package:key_synergy/API/key_synergy_api.dart';
-import 'package:key_synergy/Logic/device_info.dart';
-
 
 /* Model import */
 import 'package:key_synergy/Model/user_pofile.dart';
@@ -43,11 +41,6 @@ class KeyListContainer extends StatelessWidget {
                             Icons.vpn_key,
                             color: Color.fromARGB(255, 249, 165, 27),
                           ),
-                        ),
-                        trailing: TextButton(
-                          child: Text('Bite me'),
-                          onPressed: () {
-                          },
                         ),
                       ),
                       decoration: const BoxDecoration(
