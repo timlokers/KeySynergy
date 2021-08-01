@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:key_synergy/View/splash.dart';
 import 'View/keylist_view.dart';
-import 'package:key_synergy/Logic/Validation/user_profile_validation.dart';
 import 'View/user_profile_view.dart';
 
 void main() async{
 
   /* Default home */
-  Widget _defaultHome = KeyListView();
-
-  /* If there is no user profile with current phone id the user will be navigated to the user profile view */
-  bool _hasId = await UserProfileValidation().isUserProfileCreated();
-  if(_hasId == false){
-    _defaultHome = UserProfileView();
-  }
+  Widget _defaultHome = const Splash();
 
   /* Run the app */
   runApp(MaterialApp(
     home: _defaultHome,
     routes: <String, WidgetBuilder>{
+      '/splash': (BuildContext context) => const Splash(),
       '/home': (BuildContext context) => KeyListView(),
       '/userprofile': (BuildContext context) => UserProfileView()
     },
