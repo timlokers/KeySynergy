@@ -4,6 +4,7 @@ import 'Widgets/user_profile_form.dart';
 
 
 class UserProfileView extends StatelessWidget {
+  const UserProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,7 @@ class UserProfileView extends StatelessWidget {
           backgroundColor: const Color.fromARGB(255, 249, 165, 27),
           centerTitle: true,
         ),
-        body: Container(
-          child: UserProfileForm(),
-        ),
+        body: Center(child: UserProfileForm()),
       ),
     );
   }
