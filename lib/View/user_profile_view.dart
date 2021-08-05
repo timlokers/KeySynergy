@@ -10,6 +10,7 @@ class UserProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text(
             'Key-Synergy',
@@ -18,7 +19,7 @@ class UserProfileView extends StatelessWidget {
           backgroundColor: const Color.fromARGB(255, 249, 165, 27),
           centerTitle: true,
         ),
-        body: Center(child: UserProfileForm()),
+        body: const Center(child: UserProfileForm()),
       ),
     );
   }

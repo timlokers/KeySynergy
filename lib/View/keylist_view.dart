@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'Widgets/key_list_container.dart';
 
 class KeyListView extends StatelessWidget {
+  KeyListView({Key? key}) : super(key: key);
 
   final KeyListContainer _keyListContainer = KeyListContainer();
 

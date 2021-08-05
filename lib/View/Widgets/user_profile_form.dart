@@ -1,5 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:key_synergy/Model/user_pofile.dart';
+import 'package:key_synergy/Logic/device_info.dart';
+import 'package:key_synergy/API/key_synergy_api.dart';
+
+import '../keylist_view.dart';
+
+DeviceInfo deviceInfo = DeviceInfo();
 
 class UserProfileForm extends StatefulWidget {
   const UserProfileForm({Key? key}) : super(key: key);
@@ -11,11 +17,17 @@ class UserProfileForm extends StatefulWidget {
 }
 
 class UserProfileFormState extends State<UserProfileForm> {
+  String? _phoneId = '';
+
+  UserProfileFormState() {
+    getPhoneId().then((value) => setState(() {
+          _phoneId = value;
+        }));
+  }
+
   TextEditingController nameInputController = TextEditingController();
   TextEditingController lastnameInputController = TextEditingController();
   TextEditingController emailInputController = TextEditingController();
-
-  final String _phoneId = '';
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +42,7 @@ class UserProfileFormState extends State<UserProfileForm> {
             child: TextField(
               controller: nameInputController,
               textAlign: TextAlign.center,
+              keyboardType: TextInputType.name,
               decoration: const InputDecoration(
                 hintText: 'Enter your name here',
               ),
@@ -42,8 +55,9 @@ class UserProfileFormState extends State<UserProfileForm> {
             child: TextField(
               controller: lastnameInputController,
               textAlign: TextAlign.center,
+              keyboardType: TextInputType.name,
               decoration: const InputDecoration(
-                hintText: 'Enter your name here',
+                hintText: 'Enter your lastname here',
               ),
             ),
           ),
@@ -54,8 +68,9 @@ class UserProfileFormState extends State<UserProfileForm> {
             child: TextField(
               controller: emailInputController,
               textAlign: TextAlign.center,
+              keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                hintText: 'Enter your name here',
+                hintText: 'Enter your email here',
               ),
             ),
           ),
@@ -65,7 +80,19 @@ class UserProfileFormState extends State<UserProfileForm> {
               height: 100.0,
               width: 200.0,
               child: ElevatedButton(
-                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: const Color.fromARGB(255, 249, 165, 27),
+                ),
+                onPressed: () {
+                  KeySynergyAPI().createUserProfile(
+                      0,
+                      nameInputController.text,
+                      lastnameInputController.text,
+                      emailInputController.text,
+                      _phoneId);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => KeyListView()));
+                },
                 child: const Icon(Icons.save),
               ),
             ),
@@ -73,5 +100,9 @@ class UserProfileFormState extends State<UserProfileForm> {
         ],
       ),
     );
+  }
+
+  Future<String?> getPhoneId() async {
+    return await deviceInfo.getDeviceId();
   }
 }
