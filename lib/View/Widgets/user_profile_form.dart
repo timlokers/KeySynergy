@@ -1,11 +1,13 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:key_synergy/Logic/device_info.dart';
 import 'package:key_synergy/API/key_synergy_api.dart';
-
 import '../keylist_view.dart';
 
 DeviceInfo deviceInfo = DeviceInfo();
+
+
 
 class UserProfileForm extends StatefulWidget {
   const UserProfileForm({Key? key}) : super(key: key);
@@ -20,7 +22,8 @@ class UserProfileFormState extends State<UserProfileForm> {
   String? _phoneId = '';
 
   UserProfileFormState() {
-    getPhoneId().then((value) => setState(() {
+    getPhoneId().then((value) =>
+        setState(() {
           _phoneId = value;
         }));
   }

@@ -4,7 +4,9 @@
    <application
         android:label="key_synergy"
         android:icon="@mipmap/ic_launcher">
+
         <activity
+
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
@@ -27,8 +29,11 @@
             <meta-data
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
+
               />
             <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
@@ -38,5 +43,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
 </manifest>

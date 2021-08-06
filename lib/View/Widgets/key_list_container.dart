@@ -1,4 +1,6 @@
 /* Flutter import */
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +9,19 @@ import 'package:key_synergy/API/key_synergy_api.dart';
 
 /* Model import */
 import 'package:key_synergy/Model/user_pofile.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
-class KeyListContainer extends StatelessWidget {
+class KeyListContainer extends StatefulWidget {
+  @override
+  State<KeyListContainer> createState() => _KeyListContainerState();
+}
+
+class _KeyListContainerState extends State<KeyListContainer> {
   final KeySynergyAPI _KeySynergyAPI = KeySynergyAPI();
+
+  _KeyListContainerState(){
+    tagRead();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,4 +65,13 @@ class KeyListContainer extends StatelessWidget {
           }
         });
   }
+}
+
+void tagRead() {
+  NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+    var ndef = Ndef.from(tag);
+    var record = ndef!.cachedMessage!.records.first;
+    var decodedRecord = utf8.decode(record.payload);
+    print('DAAAAAAAATTTTTTTTTTTTTTTTTAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ' + decodedRecord.substring(3));
+  });
 }
