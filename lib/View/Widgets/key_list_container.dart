@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 /* API import */
 import 'package:key_synergy/API/key_synergy_api.dart';
+import 'package:key_synergy/Logic/nfc_handler.dart';
 
 /* Model import */
 import 'package:key_synergy/Model/user_pofile.dart';
@@ -19,8 +20,8 @@ class KeyListContainer extends StatefulWidget {
 class _KeyListContainerState extends State<KeyListContainer> {
   final KeySynergyAPI _KeySynergyAPI = KeySynergyAPI();
 
-  _KeyListContainerState(){
-    tagRead();
+   _KeyListContainerState(){
+     tagRead();
   }
 
   @override
@@ -68,10 +69,14 @@ class _KeyListContainerState extends State<KeyListContainer> {
 }
 
 void tagRead() {
-  NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+  NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async{
     var ndef = Ndef.from(tag);
     var record = ndef!.cachedMessage!.records.first;
     var decodedRecord = utf8.decode(record.payload);
-    print('DAAAAAAAATTTTTTTTTTTTTTTTTAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ' + decodedRecord.substring(3));
+
+    await Future.delayed(const Duration(milliseconds: 500), (){
+      NfcHandler().setNfcKey(decodedRecord.substring(3));
+    });
+
   });
 }

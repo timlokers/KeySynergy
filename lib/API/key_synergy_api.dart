@@ -36,10 +36,28 @@ class KeySynergyAPI {
       }),
     );
 
-    if(response.statusCode == 200 || response.statusCode == 201){
+    if (response.statusCode == 200 || response.statusCode == 201) {
       return UserProfile.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to create a user profile');
     }
-    else{
+  }
+
+  Future<String?> linkKeyWithUserProfile(String deviceId, String keyId) async {
+    String url =
+        'https://tim-lokers.outsystemscloud.com/KeySynergy_API/rest/KeySynergy/LinkKeyWithUserProfile';
+
+    final response = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{
+          'KeyId': keyId,
+          'PhoneId': deviceId,
+        }));
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return response.body;
+    } else {
       throw Exception('Failed to create a user profile');
     }
   }
