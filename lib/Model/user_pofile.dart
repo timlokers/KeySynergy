@@ -4,8 +4,9 @@ class UserProfile {
   final String lastname;
   final String email;
   final String? phoneId;
+  final bool hasKey;
 
-  UserProfile({required this.id, required this.name, required this.lastname, required this.email, this.phoneId});
+  UserProfile({required this.id, required this.name, required this.lastname, required this.email, this.phoneId, required this.hasKey});
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(
@@ -14,6 +15,7 @@ class UserProfile {
       lastname: json['Lastname'],
       email: json['Email'],
       phoneId: json['PhoneId'],
+      hasKey: json['HasKey'],
     );
   }
 }

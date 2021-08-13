@@ -12,6 +12,8 @@ import 'package:key_synergy/Logic/nfc_handler.dart';
 import 'package:key_synergy/Model/user_pofile.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
+import 'key_icon.dart';
+
 class KeyListContainer extends StatefulWidget {
   @override
   State<KeyListContainer> createState() => _KeyListContainerState();
@@ -50,10 +52,7 @@ class _KeyListContainerState extends State<KeyListContainer> {
                           alignment: Alignment.topLeft,
                           padding: const EdgeInsets.fromLTRB(
                               15.00, 00.00, 0.00, 0.00),
-                          child: const Icon(
-                            Icons.vpn_key,
-                            color: Color.fromARGB(255, 249, 165, 27),
-                          ),
+                          child: KeyIcon(data[index].hasKey),
                         ),
                       ),
                       decoration: const BoxDecoration(

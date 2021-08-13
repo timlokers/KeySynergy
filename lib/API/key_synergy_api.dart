@@ -61,4 +61,22 @@ class KeySynergyAPI {
       throw Exception('Failed to create a user profile');
     }
   }
+
+  Future<Map<dynamic, dynamic>> hasUserProfileKey(int userProfileId, String phoneId) async {
+    String url = 'https://tim-lokers.outsystemscloud.com/KeySynergy_API/rest/KeySynergy/UserProfileHasKey?UserProfileId=$userProfileId&PhoneId=$phoneId';
+
+
+    final response = await http.get(Uri.parse(url));
+
+    if(response == 200){
+      List jsonResponse = jsonDecode(response.body);
+      var keyData = Map.fromEntries(jsonResponse.map((result) => MapEntry(result['HasKey'], result['IsKeyOwner'])));
+
+      return keyData;
+    }
+    else {
+      throw Exception();
+    }
+
+  }
 }

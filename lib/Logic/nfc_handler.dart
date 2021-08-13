@@ -23,7 +23,5 @@ class NfcHandler {
     String? _deviceId = await DeviceInfo().getDeviceId();
 
     KeySynergyAPI().linkKeyWithUserProfile(_deviceId!, keyId!);
-
-    print('gedaan!');
   }
 }
