@@ -16,10 +16,18 @@ class KeyIconState extends State<KeyIcon> {
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(
+
+    if(widget.hasKey){
+      return const Icon(
       Icons.vpn_key,
       color: Color.fromARGB(255, 249, 165, 27),
     );
+    }
+    else{
+      return Container(
+        child: const Text(''),
+      );
+    }
   }
 }
 
