@@ -26,6 +26,12 @@ class _KeyListContainerState extends State<KeyListContainer> {
      tagRead();
   }
 
+  _refreshProducts(BuildContext context) async {
+    setState(() {
+      _KeySynergyAPI.getUserProfiles();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<UserProfile>>(
@@ -65,17 +71,19 @@ class _KeyListContainerState extends State<KeyListContainer> {
           }
         });
   }
-}
+  void tagRead() {
+    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async{
+      var ndef = Ndef.from(tag);
+      var record = ndef!.cachedMessage!.records.first;
+      var decodedRecord = utf8.decode(record.payload);
 
-void tagRead() {
-  NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async{
-    var ndef = Ndef.from(tag);
-    var record = ndef!.cachedMessage!.records.first;
-    var decodedRecord = utf8.decode(record.payload);
-
-    await Future.delayed(const Duration(milliseconds: 500), (){
-      NfcHandler().setNfcKey(decodedRecord.substring(3));
+      await Future.delayed(const Duration(milliseconds: 500), (){
+        NfcHandler().setNfcKey(decodedRecord.substring(3));
+        _refreshProducts(context);
+      });
     });
-
-  });
+  }
 }
+
+
+

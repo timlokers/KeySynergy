@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:key_synergy/API/key_synergy_api.dart';
 
 class KeyIcon extends StatefulWidget {
   bool hasKey;
@@ -15,11 +14,17 @@ class KeyIcon extends StatefulWidget {
 class KeyIconState extends State<KeyIcon> {
 
   @override
-  Widget build(BuildContext context) {
-    return const Icon(
-      Icons.vpn_key,
-      color: Color.fromARGB(255, 249, 165, 27),
-    );
+  Widget build(BuildContext context)
+  {
+
+    if(widget.hasKey){
+      return const Icon(
+        Icons.vpn_key,
+        color: Color.fromARGB(255, 249, 165, 27),
+      );
+    }
+    return const Text('');
+
   }
 }
 
