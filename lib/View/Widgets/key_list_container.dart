@@ -1,6 +1,5 @@
 /* Flutter import */
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +11,15 @@ import 'package:key_synergy/Logic/nfc_handler.dart';
 import 'package:key_synergy/Model/user_pofile.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
+/*Widget import*/
 import 'key_icon.dart';
 
 class KeyListContainer extends StatefulWidget {
+
+  String deviceId;
+
+  KeyListContainer(this.deviceId);
+
   @override
   State<KeyListContainer> createState() => _KeyListContainerState();
 }
@@ -26,7 +31,7 @@ class _KeyListContainerState extends State<KeyListContainer> {
      tagRead();
   }
 
-  _refreshProducts(BuildContext context) async {
+  _refreshUserProfiles(BuildContext context) async {
     setState(() {
       _KeySynergyAPI.getUserProfiles();
     });
@@ -34,6 +39,7 @@ class _KeyListContainerState extends State<KeyListContainer> {
 
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder<List<UserProfile>>(
         future: _KeySynergyAPI.getUserProfiles(),
         builder: (context, snapshot) {
@@ -58,7 +64,7 @@ class _KeyListContainerState extends State<KeyListContainer> {
                           alignment: Alignment.topLeft,
                           padding: const EdgeInsets.fromLTRB(
                               15.00, 00.00, 0.00, 0.00),
-                          child: KeyIcon(data[index].hasKey),
+                          child: KeyIcon(data[index].hasKey, data[index].phoneId!, widget.deviceId),
                         ),
                       ),
                       decoration: const BoxDecoration(
@@ -79,7 +85,7 @@ class _KeyListContainerState extends State<KeyListContainer> {
 
       await Future.delayed(const Duration(milliseconds: 500), (){
         NfcHandler().setNfcKey(decodedRecord.substring(3));
-        _refreshProducts(context);
+        _refreshUserProfiles(context);
       });
     });
   }

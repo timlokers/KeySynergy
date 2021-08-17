@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class KeyIcon extends StatefulWidget {
   bool hasKey;
+  String phoneId;
+  String phoneIdUserProfile;
 
-  KeyIcon(this.hasKey, {Key? key}) : super(key: key);
+  KeyIcon(this.hasKey, this.phoneId, this.phoneIdUserProfile, {Key? key}) : super(key: key);
 
   @override
   KeyIconState createState() {
@@ -18,6 +20,12 @@ class KeyIconState extends State<KeyIcon> {
   {
 
     if(widget.hasKey){
+      if(widget.phoneId == widget.phoneIdUserProfile){
+        return const Icon(
+          Icons.delete_forever_outlined,
+          color: Color.fromARGB(255, 249, 165, 27),
+        );
+      }
       return const Icon(
         Icons.vpn_key,
         color: Color.fromARGB(255, 249, 165, 27),
@@ -26,5 +34,8 @@ class KeyIconState extends State<KeyIcon> {
     return const Text('');
 
   }
+
 }
+
+
 

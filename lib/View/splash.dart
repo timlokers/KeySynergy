@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:key_synergy/Logic/Validation/user_profile_validation.dart';
+import 'package:key_synergy/Logic/device_info.dart';
+
+import 'keylist_view.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -18,9 +21,10 @@ class _SplashState extends State<Splash> {
   }
 
   _navigate() async {
-    _isCreated = await UserProfileValidation().isUserProfileCreated();
+    String? deviceId = await DeviceInfo().getDeviceId();
+    _isCreated = await UserProfileValidation().isUserProfileCreated(deviceId);
     if (_isCreated) {
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.of(context).pushReplacement(MaterialPageRoute(settings: const RouteSettings(name: '/home'), builder: (context) => KeyListView(deviceId!)));
     } else {
       Navigator.pushReplacementNamed(context, '/userprofile');
     }
