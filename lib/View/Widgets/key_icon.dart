@@ -5,7 +5,8 @@ class KeyIcon extends StatefulWidget {
   String phoneId;
   String phoneIdUserProfile;
 
-  KeyIcon(this.hasKey, this.phoneId, this.phoneIdUserProfile, {Key? key}) : super(key: key);
+  KeyIcon(this.hasKey, this.phoneId, this.phoneIdUserProfile, {Key? key})
+      : super(key: key);
 
   @override
   KeyIconState createState() {
@@ -14,16 +15,29 @@ class KeyIcon extends StatefulWidget {
 }
 
 class KeyIconState extends State<KeyIcon> {
-
   @override
-  Widget build(BuildContext context)
-  {
-
-    if(widget.hasKey){
-      if(widget.phoneId == widget.phoneIdUserProfile){
-        return const Icon(
-          Icons.delete_forever_outlined,
-          color: Color.fromARGB(255, 249, 165, 27),
+  Widget build(BuildContext context) {
+    if (widget.hasKey) {
+      if (widget.phoneId == widget.phoneIdUserProfile) {
+        return Container(
+          width: 50.0,
+          child: Stack(
+            children: const [
+              Icon(
+                Icons.vpn_key,
+                color: Color.fromARGB(255, 249, 165, 27),
+              ),
+              Positioned(
+                left: 3.0,
+                bottom: -3.0,
+                child: Icon(
+                  Icons.close_sharp,
+                  size: 30.0,
+                  color: Color.fromARGB(155, 255, 38, 0),
+                ),
+              ),
+            ],
+          ),
         );
       }
       return const Icon(
@@ -32,10 +46,5 @@ class KeyIconState extends State<KeyIcon> {
       );
     }
     return const Text('');
-
   }
-
 }
-
-
-

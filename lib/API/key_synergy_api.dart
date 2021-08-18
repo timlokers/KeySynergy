@@ -79,4 +79,9 @@ class KeySynergyAPI {
     }
 
   }
+
+  void removeKeyFromUser(int userProfileId){
+    String url = 'https://tim-lokers.outsystemscloud.com/KeySynergy_API/rest/KeySynergy/RemoveKeyFromUser?UserProfileId=$userProfileId';
+    http.put(Uri.parse(url));
+  }
 }

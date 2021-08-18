@@ -33,8 +33,16 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Key-Synergy',
+            style: TextStyle(color: Color.fromARGB(255, 74, 73, 65)),
+          ),
+          backgroundColor: Color.fromARGB(255, 249, 165, 27),
+          centerTitle: true,
+        ),
+      body: const Center(
           child: SizedBox(
         height: 150.0,
         width: 150.0,
