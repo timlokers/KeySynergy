@@ -2,7 +2,7 @@
     package="com.example.key_synergy">
 
    <application
-        android:label="key_synergy"
+        android:label="Key Synergy"
         android:icon="@mipmap/ic_launcher">
 
         <activity
