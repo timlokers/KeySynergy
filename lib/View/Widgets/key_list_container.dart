@@ -109,12 +109,12 @@ class _KeyListContainerState extends State<KeyListContainer> {
   void _showSnackbar(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
-      const SnackBar(
+      SnackBar(
         behavior: SnackBarBehavior.floating,
         width: 300.0,
-        backgroundColor: Color.fromARGB(191, 129, 209, 176),
-        duration: Duration(seconds: 4),
-        content: Text(
+        backgroundColor: const Color.fromARGB(191, 129, 209, 176),
+        duration: const Duration(seconds: 4),
+        content: const Text(
           'You got the key for the 7 gates of hell!',
           textAlign: TextAlign.center,
         ),
