@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'Widgets/key_list_container.dart';
 
-class KeyListView extends StatelessWidget {
-  KeyListView({Key? key}) : super(key: key);
 
-  final KeyListContainer _keyListContainer = KeyListContainer();
+class KeyListView extends StatelessWidget {
+
+  String deviceId;
+
+  KeyListView(this.deviceId, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class KeyListView extends StatelessWidget {
             backgroundColor: Color.fromARGB(255, 249, 165, 27),
             centerTitle: true,
           ),
-          body: _keyListContainer,
+          body: KeyListContainer(deviceId),
     )
     ,
     );
