@@ -12,4 +12,4 @@ class BadgeTotalKeyState extends State<BadgeTotalKey> {
   Widget build(BuildContext context) {
     return Container();
   }
-}
+} 
