@@ -84,4 +84,12 @@ class KeySynergyAPI {
     String url = 'https://tim-lokers.outsystemscloud.com/KeySynergy_API/rest/KeySynergy/RemoveKeyFromUser?UserProfileId=$userProfileId';
     http.put(Uri.parse(url));
   }
+
+  Future<String> getTotalUnusedKeys() async{
+    String url = 'https://tim-lokers.outsystemscloud.com/KeySynergy_API/rest/KeySynergy/GetTotalUnassignedKeys';
+
+    final response = await http.get(Uri.parse(url));
+      String total = utf8.decode(response.bodyBytes);
+      return total;
+  }
 }

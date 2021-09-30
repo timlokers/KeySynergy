@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:key_synergy/API/key_synergy_api.dart';
 
 class BadgeTotalKey extends StatefulWidget {
   @override
@@ -8,6 +9,15 @@ class BadgeTotalKey extends StatefulWidget {
 }
 
 class BadgeTotalKeyState extends State<BadgeTotalKey> {
+
+  String _totalKeys = '';
+
+  BadgeTotalKeyState(){
+      getTotal().then((value) =>
+      _totalKeys = value
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,9 +39,9 @@ class BadgeTotalKeyState extends State<BadgeTotalKey> {
           ),
         ],
       ),
-      child: const Text(
-        '2',
-        style: TextStyle(
+      child: Text(
+        _totalKeys,
+        style: const TextStyle(
           color: Color.fromARGB(255, 74, 73, 65),
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
@@ -39,4 +49,10 @@ class BadgeTotalKeyState extends State<BadgeTotalKey> {
       ),
     );
   }
+
+  Future<String> getTotal() async{
+    return await KeySynergyAPI().getTotalUnusedKeys();
+  }
 }
+
+

@@ -47,7 +47,7 @@ class _KeyListContainerState extends State<KeyListContainer> {
                 itemCount: data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    margin: const EdgeInsets.fromLTRB(4.0, 3.0, 10.0, 3.0),
+                    margin: const EdgeInsets.fromLTRB(4.0, 3.0, 10.0, 4.0),
                     child: Column(
                       children: [
                         ListTile(
@@ -63,21 +63,29 @@ class _KeyListContainerState extends State<KeyListContainer> {
                           subtitle: Container(
                             alignment: Alignment.topLeft,
                             padding: const EdgeInsets.fromLTRB(
-                                0.00, 00.00, 0.00, 0.00),
-                            child: IconButton(
-                              icon: KeyIcon(data[index].hasKey,
-                                  data[index].phoneId!, widget.deviceId),
-                              onPressed: () {
-                                if (data[index].hasKey == true ||
-                                    data[index].phoneId! == widget.deviceId) {
-                                  KeySynergyAPI()
-                                      .removeKeyFromUser(data[index].id);
-                                  _refreshUserProfiles(context);
-                                }
-                              },
-                            ),
+                                8.00, 00.00, 0.00, 4.50),
+                            child: KeyIcon(data[index].hasKey,
+                                data[index].phoneId!, widget.deviceId),
                           ),
-                        )
+                          trailing: (data[index].hasKey == true &&
+                                  data[index].phoneId! == widget.deviceId)
+                              ? IconButton(
+                                  icon: const Icon(
+                                    Icons.highlight_remove,
+                                    color: Color.fromARGB(255, 251, 71, 80),
+                                  ),
+                                  onPressed: () {
+                                    if (data[index].hasKey == true ||
+                                        data[index].phoneId! ==
+                                            widget.deviceId) {
+                                      KeySynergyAPI()
+                                          .removeKeyFromUser(data[index].id);
+                                      _refreshUserProfiles(context);
+                                    }
+                                  },
+                                )
+                              : const Text(""),
+                        ),
                       ],
                     ),
                   );
@@ -109,12 +117,12 @@ class _KeyListContainerState extends State<KeyListContainer> {
   void _showSnackbar(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
-      SnackBar(
+      const SnackBar(
         behavior: SnackBarBehavior.floating,
         width: 300.0,
-        backgroundColor: const Color.fromARGB(191, 129, 209, 176),
-        duration: const Duration(seconds: 4),
-        content: const Text(
+        backgroundColor: Color.fromARGB(191, 129, 209, 176),
+        duration: Duration(seconds: 4),
+        content: Text(
           'You got the key for the 7 gates of hell!',
           textAlign: TextAlign.center,
         ),
